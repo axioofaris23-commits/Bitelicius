@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiTel - Lumpia Ubi Ungu & Teh Bunga Telang</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS v4 CDN -->
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  
+  <!-- Style kustom & Font Family -->
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #240938;
+      color: #29213D;
+    }
+    
+    /* Radial Gradient Orbs & Background Patterns */
+    .bg-main-colorful {
+      background: linear-gradient(135deg, #1e0530 0%, #320e4f 35%, #4c1175 70%, #2b0840 100%);
+    }
+
+    .hero-glow {
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(236, 72, 153, 0.25) 40%, rgba(0, 0, 0, 0) 70%);
+    }
+
+    .card-purple-gradient {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FAF5FF 100%);
+    }
+
+    .glass-nav {
+      background: rgba(43, 12, 68, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(192, 132, 252, 0.2);
+    }
+
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+    }
+  </style>
+</head>
+<body class="bg-main-colorful text-gray-100 min-h-screen selection:bg-purple-500 selection:text-white">
+
+  <!-- ==================== 1. NAVBAR ==================== -->
+  <nav class="sticky top-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 group">
+
+            <!-- GAMBAR LOGO -->
+            <div class="w-10 h-10 shrink-0 rounded-2xl overflow-hidden shadow-lg shadow-purple-900/50 group-hover:rotate-6 transition-transform">
+                <img
+                    src="src/Images/logo-bitelicious.png" alt="Logo Bitelicious" class="w-full h-full object-contain"
+                >
+            </div>
+
+            <!-- NAMA BITEL -->
+            <span class="text-2xl font-black bg-gradient-to-r from-purple-200 via-pink-200 to-white bg-clip-text text-transparent tracking-tight">
+                BiTel<span class="text-pink-400">.</span>
+            </span>
+
+        </a>
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+          <a href="#beranda" class="px-4 py-2 rounded-full text-purple-200 font-semibold hover:text-white hover:bg-purple-800/50 transition">Beranda</a>
+          <a href="#menu" class="px-4 py-2 rounded-full text-purple-200 font-semibold hover:text-white hover:bg-purple-800/50 transition">Menu Kami</a>
+          <a href="#cara-pesan" class="px-4 py-2 rounded-full text-purple-200 font-semibold hover:text-white hover:bg-purple-800/50 transition">Cara Pesan</a>
+        </div>
+
+        <!-- Right Side Actions -->
+        <div class="flex items-center gap-3">
+          <!-- Cart Button Badge -->
+          <a href="#keranjang" class="relative p-2.5 rounded-2xl bg-purple-900/80 border border-purple-500/40 text-purple-200 hover:text-white hover:border-purple-400 hover:bg-purple-800 transition flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            <span id="cart-count-badge" class="absolute -top-1.5 -right-1.5 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-purple-950 badge-glow">0</span>
+          </a>
+
+          <!-- Main CTA Button -->
+          <a href="#menu" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-600 text-white font-bold text-sm shadow-lg shadow-purple-600/30 hover:shadow-purple-600/50 transform hover:-translate-y-0.5 transition">
+            Pesan Sekarang
+          </a>
+
+          <!-- Mobile Hamburger Button -->
+          <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl bg-purple-900/60 border border-purple-500/30 text-purple-200 hover:text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div id="mobile-menu" class="hidden md:hidden pb-6 pt-2 border-t border-purple-800/50">
+        <div class="flex flex-col space-y-2 font-medium">
+          <a href="#beranda" class="px-4 py-2.5 rounded-xl text-purple-200 hover:bg-purple-800/50">Beranda</a>
+          <a href="#menu" class="px-4 py-2.5 rounded-xl text-purple-200 hover:bg-purple-800/50">Menu Kami</a>
+          <a href="#cara-pesan" class="px-4 py-2.5 rounded-xl text-purple-200 hover:bg-purple-800/50">Cara Pesan</a>
+          <a href="#menu" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold text-center">Pesan Sekarang</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== 2. HERO SECTION ==================== -->
+  <section id="beranda" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+    <!-- Glowing Colorful Decorative Backgrounds -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] hero-glow pointer-events-none rounded-full blur-3xl opacity-70"></div>
+    <div class="absolute -top-20 right-0 w-96 h-96 bg-pink-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Text Content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-900/80 border border-purple-400/40 shadow-inner">
+            <span class="w-2.5 h-2.5 rounded-full bg-pink-400 animate-pulse"></span>
+            <span class="text-xs font-extrabold uppercase tracking-widest text-purple-200">Snacks & Refreshing Drinks</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+            Sensasi Manis & Segar Dalam <span class="bg-gradient-to-r from-pink-400 via-purple-300 to-indigo-300 bg-clip-text text-transparent">Setiap Gigitan!</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-purple-200/90 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
+            Kombinasi sempurna antara renyahnya <strong class="text-pink-300">Lumpia Ubi Ungu</strong> yang manis gurih dan kesegaran alami dari <strong class="text-purple-300">Teh Bunga Telang</strong>. Sajian rumahan kekinian khas Bitelicious untuk harimu!
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 text-white font-extrabold text-base shadow-xl shadow-purple-600/40 hover:shadow-purple-500/60 transform hover:-translate-y-1 transition text-center">
+              Lihat Menu Favorit
+            </a>
+            <a href="#cara-pesan" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-purple-900/60 hover:bg-purple-800/80 border border-purple-400/30 text-purple-100 font-bold text-base transition text-center backdrop-blur-md">
+              Cara Pemesanan
+            </a>
+          </div>
+
+          <!-- Feature Highlights -->
+          <div class="pt-6 grid grid-cols-3 gap-4 border-t border-purple-700/40 text-left">
+            <div class="bg-purple-900/30 p-3 rounded-2xl border border-purple-500/20 text-center sm:text-left">
+              <p class="text-2xl font-black text-pink-400">100%</p>
+              <p class="text-xs text-purple-200 font-semibold">Bahan Alami</p>
+            </div>
+            <div class="bg-purple-900/30 p-3 rounded-2xl border border-purple-500/20 text-center sm:text-left">
+              <p class="text-2xl font-black text-purple-300">Crispy</p>
+              <p class="text-xs text-purple-200 font-semibold">Lumpia Renyah</p>
+            </div>
+            <div class="bg-purple-900/30 p-3 rounded-2xl border border-purple-500/20 text-center sm:text-left">
+              <p class="text-2xl font-black text-indigo-300">Fresh</p>
+              <p class="text-xs text-purple-200 font-semibold">Teh Bunga Telang</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual Cards -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md lg:max-w-none">
+            <!-- Glow background -->
+            <div class="absolute -inset-1.5 bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-500 rounded-3xl blur-xl opacity-60"></div>
+            
+            <div class="relative rounded-3xl bg-purple-950 border border-purple-400/30 overflow-hidden shadow-2xl p-6">
+              <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-purple-900/50 mb-4">
+                <img src="src/Images/Bitel-Maskot.png" alt="Bitelicious Showcase" class="w-full h-full object-cover transform hover:scale-105 transition duration-500" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-800 to-indigo-900 text-purple-200 font-bold p-6 text-center\'><span class=\'text-4xl mb-2\'>🍠🍹</span><span>Bitelicious Signature Menu</span></div>'">
+              </div>
+
+              <div class="flex items-center justify-between bg-purple-900/60 p-4 rounded-2xl border border-purple-500/20">
+                    <div>
+                        <p class="text-xs font-bold text-pink-300 uppercase tracking-wider">Maskot Resmi</p>
+                        <p class="text-lg font-bold text-white">Halo, Aku Bitel! 👋</p>
+                    </div>
+                    <span class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 font-extrabold text-sm text-white shadow">
+                        Cute & Playful
+                    </span>
+                </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MAIN CONTENT SECTION (KATALOG & KERANJANG) ==================== -->
+  <main id="menu" class="relative z-10 py-16 bg-slate-950/40 border-t border-purple-800/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Title -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="px-4 py-1.5 rounded-full bg-pink-500/20 border border-pink-400/30 text-pink-300 font-extrabold text-xs tracking-widest uppercase">
+          MENU KAMI
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-white mt-3 mb-2">Pilih Menu Favoritmu</h2>
+        <p class="text-purple-200/80 text-sm sm:text-base font-medium">
+          Pilih varian kesukaanmu, tambahkan ke keranjang, dan pesan via WhatsApp dalam hitungan detik!
+        </p>
+      </div>
+
+      <div class="w-full">
+        
+        <!-- LEFT COLUMN: PRODUCTS CATALOG (8 cols) -->
+         <div class="w-full max-w-6xl mx-auto space-y-12">
+  
+<!-- ==================== KATALOG PRODUK ==================== -->
+<section class="w-full min-w-0 space-y-12">
+
+    <!-- KELOMPOK 1: LUMPIA UBI UNGU -->
+    <div class="w-full max-w-6xl mx-auto">
+
+        <!-- HEADER KATEGORI -->
+        <div class="flex items-center gap-3 mb-8 border-b border-purple-800/60 pb-4">
+            <div class="shrink-0 p-3 rounded-xl bg-pink-500/20 text-pink-300 text-xl font-bold">
+                🍠
+            </div>
+
+            <div>
+                <h3 class="text-xl font-black text-white">
+                    Lumpia Ubi Ungu
+                </h3>
+
+                <p class="text-xs text-purple-300 font-medium mt-1">
+                    Lumpia renyah dengan isian ubi ungu olahan khas
+                </p>
+            </div>
+        </div>
+
+        <!-- GRID PRODUK -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center">
+
+            <!-- 1. LUMPIA ORIGINAL -->
+            <article class="w-full max-w-sm h-full rounded-3xl card-purple-gradient border border-purple-300/40 shadow-xl overflow-hidden flex flex-col group hover:border-pink-400/80 transition duration-300 hover:shadow-purple-500/20 hover:-translate-y-1">
+
+                <div class="relative aspect-[4/3] bg-purple-100 overflow-hidden">
+                    <img
+                        src="src/Images/lumpia-original.jpg"
+                        alt="Lumpia Ubi Ungu Original"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    >
+
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-purple-900/80 text-purple-200 backdrop-blur-md">
+                        Snack
+                    </span>
+                </div>
+
+                <div class="p-5 flex flex-col flex-1">
+                    <h4 class="text-base font-extrabold text-gray-900 mb-2 leading-snug group-hover:text-purple-700 transition">
+                        Lumpia Ubi Ungu Original
+                    </h4>
+
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Lumpia renyah dengan isian ubi ungu yang lembut dan manis alami.
+                    </p>
+
+                    <div class="mt-auto pt-5 flex items-center justify-between gap-3 border-t border-purple-100/60">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 block uppercase">
+                                Harga
+                            </span>
+                            <span class="text-base font-black text-purple-700">
+                                Rp9.000
+                            </span>
+                        </div>
+
+                        <div data-product-control="lumpia-orig"></div>
+                    </div>
+                </div>
+            </article>
+
+
+            <!-- 2. LUMPIA KEJU -->
+            <article class="w-full max-w-sm h-full rounded-3xl card-purple-gradient border border-purple-300/40 shadow-xl overflow-hidden flex flex-col group hover:border-pink-400/80 transition duration-300 hover:shadow-purple-500/20 hover:-translate-y-1">
+
+                <div class="relative aspect-[4/3] bg-purple-100 overflow-hidden">
+                    <img
+                        src="src/Images/lumpia-keju.jpg"
+                        alt="Lumpia Ubi Ungu Keju"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    >
+
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-purple-900/80 text-purple-200 backdrop-blur-md">
+                        Snack
+                    </span>
+                </div>
+
+                <div class="p-5 flex flex-col flex-1">
+                    <h4 class="text-base font-extrabold text-gray-900 mb-2 leading-snug group-hover:text-purple-700 transition">
+                        Lumpia Ubi Ungu Keju
+                    </h4>
+
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Perpaduan ubi ungu lembut dengan cita rasa keju yang gurih.
+                    </p>
+
+                    <div class="mt-auto pt-5 flex items-center justify-between gap-3 border-t border-purple-100/60">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 block uppercase">
+                                Harga
+                            </span>
+                            <span class="text-base font-black text-purple-700">
+                                Rp10.000
+                            </span>
+                        </div>
+
+                        <div data-product-control="lumpia-keju"></div>
+                    </div>
+                </div>
+            </article>
+
+
+            <!-- 3. LUMPIA COKELAT -->
+            <article class="w-full max-w-sm h-full rounded-3xl card-purple-gradient border border-purple-300/40 shadow-xl overflow-hidden flex flex-col group hover:border-pink-400/80 transition duration-300 hover:shadow-purple-500/20 hover:-translate-y-1">
+
+                <div class="relative aspect-[4/3] bg-purple-100 overflow-hidden">
+                    <img
+                        src="src/Images/lumpia-cokelat.jpg"
+                        alt="Lumpia Ubi Ungu Cokelat"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                    >
+
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-purple-900/80 text-purple-200 backdrop-blur-md">
+                        Snack
+                    </span>
+                </div>
+
+                <div class="p-5 flex flex-col flex-1">
+                    <h4 class="text-base font-extrabold text-gray-900 mb-2 leading-snug group-hover:text-purple-700 transition">
+                        Lumpia Ubi Ungu Cokelat
+                    </h4>
+
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        Lumpia renyah dengan isian ubi ungu dan cokelat yang manis.
+                    </p>
+
+                    <div class="mt-auto pt-5 flex items-center justify-between gap-3 border-t border-purple-100/60">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 block uppercase">
+                                Harga
+                            </span>
+                            <span class="text-base font-black text-purple-700">
+                                Rp10.000
+                            </span>
+                        </div>
+                        <div data-product-control="lumpia-cokelat"></div>
+
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- KELOMPOK 2: TEH TELANG (2 PRODUK) -->
+   <div>
+    <div class="flex items-center gap-3 mb-6 border-b border-purple-800/60 pb-3">
+      <div class="p-2 rounded-xl bg-purple-500/20 text-purple-300 text-xl font-bold">🍹</div>
+      <div>
+        <h3 class="text-xl font-black text-white">Teh Bunga Telang</h3>
+        <p class="text-xs text-purple-300 font-medium">Minuman alami kaya antioksidan dengan tampilan visual menarik</p>
+      </div>
+    </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+
+            <div class="rounded-3xl card-purple-gradient border border-purple-300/40 shadow-xl overflow-hidden flex flex-col justify-between group hover:border-pink-400/80 transition duration-300 hover:shadow-purple-500/20 hover:-translate-y-1">
+                <div>
+                    <div class="relative aspect-[4/3] bg-purple-100 overflow-hidden">
+                        <img src="src/Images/violet-galaxy.jpg" alt="Teh Telang Violet Galaxy" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-purple-900/80 text-purple-200 backdrop-blur-md">Drink</span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-base font-extrabold text-gray-900 mb-1 leading-snug group-hover:text-purple-700 transition">Teh Telang Violet Galaxy</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">Teh bunga telang dengan warna violet yang cantik dan rasa menyegarkan.</p>
+                    </div>
+                </div>
+                
+                <div class="px-5 pb-5 pt-0 flex items-center justify-between border-t border-purple-100/60 mt-auto">
+                    <div>
+                        <span class="text-[10px] font-bold text-gray-400 block uppercase">Harga</span>
+                        <span class="text-base font-black text-purple-700">Rp5.000</span>
+                    </div>
+                    
+                    <!-- WIDGET TOMBOL (Gunakan data-product-control) -->
+                    <div data-product-control="teh-violet"></div>
+                </div>
+            </div>
+
+        <!-- 2. Blue Ocean -->
+        <div class="rounded-3xl card-purple-gradient border border-purple-300/40 shadow-xl overflow-hidden flex flex-col justify-between group hover:border-pink-400/80 transition duration-300 hover:shadow-purple-500/20 hover:-translate-y-1">
+            <div>
+                 <div class="relative aspect-[4/3] bg-purple-100 overflow-hidden">
+                   <!-- EDIT PATH GAMBAR DI SINI -->
+                     <img src="src/Images/blue-ocean.jpg" alt="Teh Telang Blue Ocean" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-purple-900/80 text-purple-200 backdrop-blur-md">Drink</span>
+            </div>
+                     <div class="p-5">
+                        <h4 class="text-base font-extrabold text-gray-900 mb-1 leading-snug group-hover:text-purple-700 transition">Teh Telang Blue Ocean</h4>
+                         <p class="text-xs text-gray-600 leading-relaxed mb-4">Perpaduan teh bunga telang dan susu dengan tampilan biru yang menarik.</p>
+                    </div>
+            </div>
+                    <div class="px-5 pb-5 pt-0 flex items-center justify-between border-t border-purple-100/60 mt-auto">
+                     <div>
+                          <span class="text-[10px] font-bold text-gray-400 block uppercase">Harga</span>
+                          <span class="text-base font-black text-purple-700">Rp7.000</span>
+                   </div>
+
+             <div data-product-control="teh-blue"></div>
+                
+            </div>
+
+        </div>
+    </div>
+
+       <!-- KELOMPOK 3: PAKET BUNDLING (2 PRODUK) -->
+        <div>
+            <div class="flex items-center gap-3 mb-6 border-b border-purple-800/60 pb-3">
+                <div class="p-2 rounded-xl bg-pink-500/20 text-pink-300 text-xl font-bold">🎁</div>
+                <div>
+                    <h3 class="text-xl font-black text-white">Paket Bundling Hemat</h3>
+                    <p class="text-xs text-purple-300 font-medium">Kombinasi makanan dan minuman dengan harga lebih hemat</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Bundling 1 -->
+                <div class="rounded-3xl card-purple-gradient border border-purple-300/40 shadow-xl overflow-hidden flex flex-col justify-between group hover:border-pink-400/80 transition duration-300 hover:shadow-purple-500/20 hover:-translate-y-1">
+                    <div>
+                        <div class="relative aspect-[4/3] bg-purple-100 overflow-hidden">
+                            <img src="src/Images/Doping.png" alt="Paket Dopping" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-purple-900/80 text-purple-200 backdrop-blur-md">Bundling</span>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="text-base font-extrabold text-gray-900 mb-1 leading-snug group-hover:text-purple-700 transition">Paket Dopping</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-4">Lumpia Ubi Ungu (Keju/Coklat) + 1 Teh Telang Violet Galaxy.</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-0 flex items-center justify-between border-t border-purple-100/60 mt-auto">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 block uppercase">Harga</span>
+                            <span class="text-base font-black text-purple-700">Rp15.000</span>
+                        </div>
+                        <div data-product-control="bundle-1"></div>
+                    </div>
+                </div>
+
+                <!-- Bundling 2 -->
+                <div class="rounded-3xl card-purple-gradient border border-purple-300/40 shadow-xl overflow-hidden flex flex-col justify-between group hover:border-pink-400/80 transition duration-300 hover:shadow-purple-500/20 hover:-translate-y-1">
+                    <div>
+                        <div class="relative aspect-[4/3] bg-purple-100 overflow-hidden">
+                            <img src="src/Images/Paradise.png" alt="Paket Combo Hemat 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-purple-900/80 text-purple-200 backdrop-blur-md">Bundling</span>
+                        </div>
+                        <div class="p-5">
+                            <h4 class="text-base font-extrabold text-gray-900 mb-1 leading-snug group-hover:text-purple-700 transition">Paket Paradise</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-4">Lumpia Ubi Ungu (Keju/Coklat) + 1 Telang Blue Ocean.</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-0 flex items-center justify-between border-t border-purple-100/60 mt-auto">
+                        <div>
+                            <span class="text-[10px] font-bold text-gray-400 block uppercase">Harga</span>
+                            <span class="text-base font-black text-purple-700">Rp16.000</span>
+                        </div>
+                        <div data-product-control="bundle-2"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+                <!-- RIGHT COLUMN: CART & ORDER FORM (4 cols) -->
+                <div class="lg:col-span-5 xl:col-span-4 sticky top-28 space-y-6">
+                
+                <!-- KERANJANG CARD -->
+                <div id="keranjang" class="rounded-3xl bg-purple-950/90 border border-purple-500/30 shadow-2xl p-6 backdrop-blur-md">
+                    <div class="flex items-center justify-between border-b border-purple-800/60 pb-4 mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="p-2 rounded-xl bg-purple-800/60 text-purple-200">🛒</span>
+                        <h3 class="text-lg font-black text-white">Keranjang Pesanan</h3>
+                    </div>
+                    <span id="cart-item-count-text" class="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-800 text-purple-200">0 Item</span>
+                    </div>
+
+                    <!-- Cart Items List Container -->
+                    <div id="cart-items-container" class="max-h-64 overflow-y-auto space-y-3 pr-1 mb-4">
+                    <!-- Filled via JS -->
+                    </div>
+
+                    <!-- Total Price Display -->
+                    <div class="bg-purple-900/40 p-4 rounded-2xl border border-purple-500/20 flex items-center justify-between mb-6">
+                    <span class="text-sm font-bold text-purple-200">Total Pembayaran:</span>
+                    <span id="cart-total-price" class="text-xl font-black bg-gradient-to-r from-pink-300 to-purple-200 bg-clip-text text-transparent">Rp0</span>
+                    </div>
+
+                    <!-- ==================== 4F. FORMULIR PEMESANAN ==================== -->
+                    <form id="order-form" class="space-y-4 border-t border-purple-800/60 pt-4">
+                    <h4 class="text-sm font-extrabold text-purple-200 uppercase tracking-wider">Lengkapi Pesananmu</h4>
+
+                    <!-- Nama -->
+                    <div>
+                        <label for="customer-name" class="block text-xs font-bold text-purple-200 mb-1">Nama Pemesan <span class="text-pink-400">*</span></label>
+                        <input type="text" id="customer-name" required placeholder="Contoh: Budi Santoso" class="w-full px-4 py-2.5 rounded-xl bg-purple-900/60 border border-purple-600/40 text-white placeholder-purple-400/60 text-sm focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition">
+                    </div>
+
+                    <!-- Telepon -->
+                    <div>
+                        <label for="customer-phone" class="block text-xs font-bold text-purple-200 mb-1">Nomor Telepon (WhatsApp) <span class="text-pink-400">*</span></label>
+                        <input type="tel" id="customer-phone" required placeholder="Contoh: 08123456789" class="w-full px-4 py-2.5 rounded-xl bg-purple-900/60 border border-purple-600/40 text-white placeholder-purple-400/60 text-sm focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition">
+                    </div>
+
+                    <!-- Metode Pesanan -->
+                    <div>
+                        <label class="block text-xs font-bold text-purple-200 mb-1">Metode Pesanan <span class="text-pink-400">*</span></label>
+                        <div class="grid grid-cols-2 gap-2">
+                        <label class="flex items-center justify-center p-2.5 rounded-xl border border-purple-600/40 bg-purple-900/40 cursor-pointer hover:bg-purple-800/50 has-[:checked]:bg-gradient-to-r has-[:checked]:from-purple-600 has-[:checked]:to-pink-600 has-[:checked]:border-transparent transition">
+                            <input type="radio" name="order-method" value="Diantar" checked class="sr-only" id="method-delivery">
+                            <span class="text-xs font-bold text-white">🚚 Diantar</span>
+                        </label>
+                        <label class="flex items-center justify-center p-2.5 rounded-xl border border-purple-600/40 bg-purple-900/40 cursor-pointer hover:bg-purple-800/50 has-[:checked]:bg-gradient-to-r has-[:checked]:from-purple-600 has-[:checked]:to-pink-600 has-[:checked]:border-transparent transition">
+                            <input type="radio" name="order-method" value="Ambil Sendiri" class="sr-only" id="method-pickup">
+                            <span class="text-xs font-bold text-white">🏪 Ambil Sendiri</span>
+                        </label>
+                        </div>
+                    </div>
+
+                    <!-- Alamat Pengantaran (Conditional) -->
+                    <div id="address-container">
+                        <label for="customer-address" class="block text-xs font-bold text-purple-200 mb-1">Alamat Pengantaran <span class="text-pink-400">*</span></label>
+                        <textarea id="customer-address" rows="2" placeholder="Tuliskan alamat lengkap pengantaran..." class="w-full px-4 py-2.5 rounded-xl bg-purple-900/60 border border-purple-600/40 text-white placeholder-purple-400/60 text-sm focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition"></textarea>
+                    </div>
+
+                    <!-- Catatan Pesanan -->
+                    <div>
+                        <label for="customer-notes" class="block text-xs font-bold text-purple-200 mb-1">Catatan Pesanan <span class="text-purple-400">(Opsional)</span></label>
+                        <input type="text" id="customer-notes" placeholder="Contoh: Kurangi manis, tanpa es, dll." class="w-full px-4 py-2.5 rounded-xl bg-purple-900/60 border border-purple-600/40 text-white placeholder-purple-400/60 text-sm focus:outline-none focus:border-pink-400 focus:ring-1 focus:ring-pink-400 transition">
+                    </div>
+
+                    <!-- Error Feedback Message -->
+                    <div id="form-error-msg" class="hidden p-3 rounded-xl bg-red-500/20 border border-red-400/40 text-red-200 text-xs font-semibold"></div>
+
+                    <!-- Submit Button WhatsApp -->
+                    <button type="button" id="btn-submit-order" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-900/40 transform hover:-translate-y-0.5 transition flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                        </svg>
+                        Pesan via WhatsApp
+                    </button>
+
+                    <p class="text-[11px] text-purple-300/70 text-center">
+                        Pesanan akan diteruskan langsung ke WhatsApp penjual untuk konfirmasi.
+                    </p>
+                    </form>
+                </div>
+
+                </div>
+
+            </div>
+
+            </div>
+        </main>
+
+  <!-- ==================== 4I. CARA PESAN SECTION ==================== -->
+  <section id="cara-pesan" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="px-4 py-1.5 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-300 font-extrabold text-xs tracking-widest uppercase">
+          MUDAH & CEPAT
+        </span>
+        <h2 class="text-3xl font-black text-white mt-3 mb-2">3 Langkah Mudah Pemesanan</h2>
+        <p class="text-purple-200/80 text-sm font-medium">Nikmati kelezatan Bitelicious tanpa proses yang rumit!</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Step 1 -->
+        <div class="rounded-3xl bg-purple-900/30 border border-purple-500/20 p-8 text-center relative group hover:border-purple-400/50 transition">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-purple-600/30 group-hover:scale-110 transition duration-300">
+            1
+          </div>
+          <h3 class="text-lg font-extrabold text-white mb-2">Pilih Produk Favorit</h3>
+          <p class="text-purple-200/80 text-sm">Jelajahi pilihan varian Lumpia Ubi Ungu dan Teh Bunga Telang yang tersedia di katalog.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="rounded-3xl bg-purple-900/30 border border-purple-500/20 p-8 text-center relative group hover:border-purple-400/50 transition">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-pink-600/30 group-hover:scale-110 transition duration-300">
+            2
+          </div>
+          <h3 class="text-lg font-extrabold text-white mb-2">Isi Data Pemesanan</h3>
+          <p class="text-purple-200/80 text-sm">Tambahkan ke keranjang, tentukan jumlah, dan lengkapi data pengiriman Anda.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="rounded-3xl bg-purple-900/30 border border-purple-500/20 p-8 text-center relative group hover:border-purple-400/50 transition">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-emerald-600/30 group-hover:scale-110 transition duration-300">
+            3
+          </div>
+          <h3 class="text-lg font-extrabold text-white mb-2">Konfirmasi WhatsApp</h3>
+          <p class="text-purple-200/80 text-sm">Klik tombol pemesanan dan kirim format pesan otomatis langsung ke WhatsApp kami.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4J. FOOTER ==================== -->
+  <footer class="bg-purple-950 border-t border-purple-800/60 py-12 text-purple-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-purple-800/40">
+
+
+      </div>
+
+      <div class="pt-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center text-xs text-purple-300/60 gap-4">
+        <p>© 2026 BiTel. Cemilan Ubi Ungu dengan varian rasa dipadukan 
+            <br>dengan Teh dari sari bunga Telang yang menyegarkan.</p>
+        <p>Pemesanan langsung diproses melalui WhatsApp Click to Chat API.</p>
+      </div>
+    </div>
+  </footer>
+
+   <script src="src/script.js"></script>
+</body>
+</html>
