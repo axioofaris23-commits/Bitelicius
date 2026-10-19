@@ -535,6 +535,50 @@
                         </div>
                     </div>
 
+                                            
+                        <!-- Metode Pembayaran -->
+                        <div>
+                            <label class="block text-xs font-bold text-purple-200 mb-1">
+                                Metode Pembayaran <span class="text-pink-400">*</span>
+                            </label>
+
+                            <div class="grid grid-cols-2 gap-2">
+
+                                <!-- COD -->
+                                <label class="flex items-center justify-center p-3 rounded-xl border border-purple-600/40 bg-purple-900/40 cursor-pointer hover:bg-purple-800/50 has-[:checked]:bg-gradient-to-r has-[:checked]:from-purple-600 has-[:checked]:to-pink-600 has-[:checked]:border-transparent transition">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        value="COD (Bayar di Tempat)"
+                                        id="payment-cod"
+                                        class="sr-only"
+                                        checked
+                                    >
+                                    <span class="text-xs font-bold text-white text-center">
+                                        💵 COD<br>
+                                        <span class="text-[10px] font-normal">Bayar di Tempat</span>
+                                    </span>
+                                </label>
+
+                                <!-- Bayar Sekarang -->
+                                <label class="flex items-center justify-center p-3 rounded-xl border border-purple-600/40 bg-purple-900/40 cursor-pointer hover:bg-purple-800/50 has-[:checked]:bg-gradient-to-r has-[:checked]:from-purple-600 has-[:checked]:to-pink-600 has-[:checked]:border-transparent transition">
+                                    <input
+                                        type="radio"
+                                        name="payment-method"
+                                        value="Bayar Sekarang"
+                                        id="payment-now"
+                                        class="sr-only"
+                                    >
+                                    <span class="text-xs font-bold text-white text-center">
+                                        📱 Bayar Sekarang<br>
+                                        <span class="text-[10px] font-normal">Pembayaran di awal</span>
+                                    </span>
+                                </label>
+
+                            </div>
+                        </div>
+
+
                     <!-- Alamat Pengantaran (Conditional) -->
                     <div id="address-container">
                         <label for="customer-address" class="block text-xs font-bold text-purple-200 mb-1">Alamat Pengantaran <span class="text-pink-400">*</span></label>

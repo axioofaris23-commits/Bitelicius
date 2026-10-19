@@ -295,26 +295,32 @@
     if (el) el.classList.add('hidden');
   }
 
-  function buildMessage(data) {
+function buildMessage(data) {
     const { items, total } = cartTotals();
+
     const daftar = items
-      .map((i) => `- ${i.name} x${i.qty} (${rupiah(i.price * i.qty)})`)
-      .join('\n');
+        .map((i) => `- ${i.name} x${i.qty} (${rupiah(i.price * i.qty)})`)
+        .join('\n');
 
     const metode = data.method === 'Diantar'
-      ? `Diantar\nAlamat: ${data.address}`
-      : 'Ambil Sendiri';
+        ? `Diantar\nAlamat: ${data.address}`
+        : 'Ambil Sendiri';
 
     let msg =
-      `Nama Pemesan: ${data.name}\n` +
-      `No Telp: ${data.phone}\n` +
-      `Diantar/Ambil: ${metode}\n` +
-      `Pesanannya apa aja:\n${daftar}\n` +
-      `Total: ${rupiah(total)}`;
+        `Nama Pemesan: ${data.name}\n` +
+        `No Telp: ${data.phone}\n` +
+        `Diantar/Ambil: ${metode}\n` +
+        `Metode Pembayaran: ${data.payment}\n` +
+        `Pesanannya apa aja:\n${daftar}\n` +
+        `Total: ${rupiah(total)}`;
 
-    if (data.notes) msg += `\nCatatan: ${data.notes}`;
+    if (data.notes) {
+        msg += `\nCatatan: ${data.notes}`;
+    }
+
     return msg;
-  }
+}
+
 
   function openWhatsApp(message) {
     const url =
@@ -335,7 +341,8 @@
     }
   }
 
-  function submitOrder() {
+
+function submitOrder() {
     clearError();
 
     const name = $('customer-name').value.trim();
@@ -345,19 +352,48 @@
     const address = $('customer-address').value.trim();
     const notes = $('customer-notes').value.trim();
 
-    if (!cartTotals().items.length) return showError('Keranjang masih kosong. Pilih menu dulu ya.');
-    if (name.length < 2) { $('customer-name').focus(); return showError('Nama pemesan wajib diisi.'); }
-    if (phone.length < 10 || phone.length > 15) {
-      $('customer-phone').focus();
-      return showError('Nomor telepon tidak valid. Contoh: 08123456789');
-    }
-    if (method === 'Diantar' && address.length < 5) {
-      $('customer-address').focus();
-      return showError('Alamat pengantaran wajib diisi jika memilih Diantar.');
+    // Ambil metode pembayaran yang dipilih
+    const paymentElement = document.querySelector(
+        'input[name="payment-method"]:checked'
+    );
+
+    if (!paymentElement) {
+        return showError('Pilih metode pembayaran terlebih dahulu.');
     }
 
-    openWhatsApp(buildMessage({ name, phone: phoneRaw, method, address, notes }));
-  }
+    const payment = paymentElement.value;
+
+    // Validasi pesanan
+    if (!cartTotals().items.length) {
+        return showError('Keranjang masih kosong. Pilih menu dulu ya.');
+    }
+
+    if (name.length < 2) {
+        $('customer-name').focus();
+        return showError('Nama pemesan wajib diisi.');
+    }
+
+    if (phone.length < 10 || phone.length > 15) {
+        $('customer-phone').focus();
+        return showError('Nomor telepon tidak valid. Contoh: 08123456789');
+    }
+
+    if (method === 'Diantar' && address.length < 5) {
+        $('customer-address').focus();
+        return showError('Alamat pengantaran wajib diisi jika memilih Diantar.');
+    }
+
+    // Kirim pesanan beserta metode pembayaran ke WhatsApp
+    openWhatsApp(buildMessage({
+        name,
+        phone: phoneRaw,
+        method,
+        address,
+        notes,
+        payment
+    }));
+}
+
 
   /* ---------- Inisialisasi ---------- */
   function init() {
