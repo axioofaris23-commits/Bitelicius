@@ -342,6 +342,7 @@ function buildMessage(data) {
   }
 
 
+
 function submitOrder() {
     clearError();
 
@@ -351,19 +352,9 @@ function submitOrder() {
     const method = currentMethod();
     const address = $('customer-address').value.trim();
     const notes = $('customer-notes').value.trim();
+    const payment = 'Pembayaran di Muka';
 
-    // Ambil metode pembayaran yang dipilih
-    const paymentElement = document.querySelector(
-        'input[name="payment-method"]:checked'
-    );
 
-    if (!paymentElement) {
-        return showError('Pilih metode pembayaran terlebih dahulu.');
-    }
-
-    const payment = paymentElement.value;
-
-    // Validasi pesanan
     if (!cartTotals().items.length) {
         return showError('Keranjang masih kosong. Pilih menu dulu ya.');
     }
@@ -383,7 +374,6 @@ function submitOrder() {
         return showError('Alamat pengantaran wajib diisi jika memilih Diantar.');
     }
 
-    // Kirim pesanan beserta metode pembayaran ke WhatsApp
     openWhatsApp(buildMessage({
         name,
         phone: phoneRaw,
@@ -393,6 +383,7 @@ function submitOrder() {
         payment
     }));
 }
+
 
 
   /* ---------- Inisialisasi ---------- */
