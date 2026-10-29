@@ -13,11 +13,11 @@
 
   // Kunci harus sama dengan yang dipakai di data-product-control="..."
   const PRODUCTS = {
-    'lumpia-orig':    { name: 'Lumpia Ubi Ungu Original',      price: 9000 },
-    'lumpia-keju':    { name: 'Lumpia Ubi Ungu Keju',          price: 10000 },
-    'lumpia-cokelat': { name: 'Lumpia Ubi Ungu Cokelat',       price: 10000 },
-    'teh-violet':     { name: 'Teh Telang Violet Galaxy',      price: 5000 },
-    'teh-blue':       { name: 'Teh Telang Blue Ocean',         price: 7000 },
+    'lumpia-orig':    { name: 'Lumpia Ubi Ungu Original',      price: 11000 },
+    'lumpia-keju':    { name: 'Lumpia Ubi Ungu Keju',          price: 13000 },
+    'lumpia-cokelat': { name: 'Lumpia Ubi Ungu Cokelat',       price: 13000 },
+    'teh-violet':     { name: 'Teh Telang Violet Galaxy',      price: 7000 },
+    'teh-blue':       { name: 'Teh Telang Blue Ocean',         price: 9000 },
     'bundle-1':       { name: 'Paket Dopping',                 price: 15000 },
     'bundle-2':       { name: 'Paket Paradise',                price: 16000 },
   };
